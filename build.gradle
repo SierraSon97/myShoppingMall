@@ -16,9 +16,6 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-    all{
-        exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging'
-    }
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -44,9 +41,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-
-    compile 'org.springframework.boot:spring-boot-starter-log4j2'
-    compile group: 'com.fasterxml.jackson.dataformat', name:'jackson-dataformat-yaml', version: '2.10.3'
 }
 
 tasks.named('test') {

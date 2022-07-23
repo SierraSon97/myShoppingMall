@@ -13,6 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    /*
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http.formLogin()
@@ -35,11 +36,11 @@ public class SecurityConfig {
         ;
 
         return http.build();
-    }
-
+    }*/
+    /*
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    }*/
 
 }
