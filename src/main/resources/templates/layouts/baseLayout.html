@@ -12,7 +12,11 @@
     </head>
     <body>
     <nav th:replace="~{/fragments/navigation}"></nav>
-    <th:block th:replace = "${content}"></th:block>
+    <section class="py-5">
+        <div class="container">
+            <th:block th:replace="${content}"></th:block>
+        </div>
+    </section>
     <footer th:replace="~{/fragments/footer}"></footer>
     </body>
 </th:block>

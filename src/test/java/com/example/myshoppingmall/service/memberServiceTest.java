@@ -13,6 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -28,12 +29,11 @@ class memberServiceTest {
     PasswordEncoder passwordEncoder;
 
     public Member createMember(){
-        MemberDto memberDto = MemberDto.builder()
-                .email("test@email.com")
-                .name("홍길동")
-                .address("부산광역시 동래구 엄복동")
-                .password(passwordEncoder.encode("1234"))
-                .build();
+        MemberDto memberDto = new MemberDto();
+        memberDto.setEmail("test@email.com");
+        memberDto.setName("홍길동");
+        memberDto.setAddress("부산광역시 동래구 엄복동");
+        memberDto.setPassword(passwordEncoder.encode("1234"));
         Member member = Member.createMember(memberDto, passwordEncoder, false);
         return member;
     }
@@ -51,5 +51,19 @@ class memberServiceTest {
         assertEquals(member.getId(), savedMember.getId());
         assertEquals(member.getPassword(), savedMember.getPassword());
         assertEquals(member.getRole(), savedMember.getRole());
+    }
+
+    @Test
+    @DisplayName("중복 회원 가입 테스트")
+    public void saveDuplicateMemberTest(){
+        Member member1 = createMember();
+        Member member2 = createMember();
+        memberService.saveMember(member1);
+
+        Throwable e = assertThrows(IllegalStateException.class, () ->{
+            memberService.saveMember(member2);
+        });
+
+        assertEquals("이미 가입된 회원입니다.", e.getMessage());
     }
 }
