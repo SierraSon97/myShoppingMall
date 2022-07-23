@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="setContent(content)">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>login</title>
+        <th:block th:replace="~{/common/include-css}"></th:block>
+        <th:block th:replace="~{/common/include-js}"></th:block>
+    </head>
+    <body>
+    <nav th:replace="~{/fragments/navigation}"></nav>
+    <th:block th:replace = "${content}"></th:block>
+    <footer th:replace="~{/fragments/footer}"></footer>
+    </body>
+</th:block>
+</html>
