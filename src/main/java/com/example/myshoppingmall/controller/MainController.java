@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class mainController {
+public class MainController {
     @GetMapping("/")
     public String main(){
         return "/main";
