@@ -3,7 +3,7 @@
 <th:block th:replace="~{/layouts/baseLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <div class="login-wrapper">
-            <form role="form" method="post" id="login-form">
+            <form role="form" method="post" id="login-form" action="/members/login">
                 <div class="form-group mb-4">
                     <label th:for="email">Email Address</label>
                     <input type="email" name="email" class="form-control" placeholder="Please Insert Email Address">
@@ -12,8 +12,10 @@
                     <label th:for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Please Insert Password">
                 </div>
+                <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
                 <button class="btn btn-primary mb-4">Sign in</button>
-                <button type="button" class="btn btn-primary mb-4">Sign up</button>
+                <button type="button" class="btn btn-primary mb-4" onclick="location.href='/members/registNew'">Sign up</button>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             </form>
         </div>
     </th:block>
