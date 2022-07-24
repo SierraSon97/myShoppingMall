@@ -30,10 +30,16 @@ public class MemberController {
     @PostMapping(value="/registNew")
     public String memberForm(@Valid MemberDto memberDto,
                              BindingResult bindingResult, Model model){
-        Member member = Member.createMember(memberDto, passwordEncoder, false);
-        memberService.saveMember(member);
-
-
+        if(bindingResult.hasErrors()){
+            return "member/memberForm";
+        }
+        try{
+            Member member = Member.createMember(memberDto, passwordEncoder, false);
+            memberService.saveMember(member);
+        } catch (Exception e){
+            model.addAttribute("errorMessage", e.getMessage());
+            return "member/memberForm";
+        }
 
         return "redirect:/";
     }

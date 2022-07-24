@@ -15,13 +15,9 @@ public class MemberService {
     @Autowired
     private final MemberRepository memberRepository;
 
-    public ResponseEntity<Member> saveMember(Member member){
+    public Member saveMember(Member member){
         validateDuplicateMember(member);
-        if(memberRepository.save(member) != null) {
-            return ResponseEntity.ok(member);
-        } else {
-            return ResponseEntity.badRequest().body(member);
-        }
+        return memberRepository.save(member);
     }
 
     private void validateDuplicateMember(Member member){
