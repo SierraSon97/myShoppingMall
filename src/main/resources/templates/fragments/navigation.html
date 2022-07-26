@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">Spring Boot Shopping mall</a>
+        <a class="navbar-brand">Spring Boot Shopping mall</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -17,12 +18,31 @@
                         <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><a class="dropdown-item" href="#!">Product Registration</a></li>
+                        <li><a class="dropdown-item" href="#!">Product Management</a></li>
+                    </ul>
+                </li>
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+            <form class="d-flex" sec:authorize="isAnonymous()" method="get" action="/members/login">
+                <button class="btn btn-outline-dark" type="submit">
+                    Sign In
+                    <span class="badge bg-dark text-white ms-1 rouded-pill"></span>
+                </button>
+            </form>
+            <form class="d-flex" sec:authorize="isAuthenticated()" method="get" action="/members/logout">
+                <button class="btn btn-outline-dark" type="submit">
+                    log out
+                    <span class="badge bg-dark text-white ms-1 rouded-pill"></span>
                 </button>
             </form>
         </div>
